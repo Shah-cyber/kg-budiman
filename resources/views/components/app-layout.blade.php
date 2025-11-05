@@ -17,7 +17,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 font-poppins">
     {{-- Navbar --}}
     @include('components.header-guest')
     <div class="pt-16"></div>
@@ -30,6 +30,4 @@
     {{-- Footer --}}
     @include('components.footer')
 </body>
-
-
 </html>
