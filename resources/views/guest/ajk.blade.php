@@ -1,7 +1,6 @@
 <x-app-layout :title="'Ahli Jawatankuasa'">
     <!-- Hero Section -->
-   <section class="relative h-screen flex items-center justify-center overflow-hidden font-sans">
-
+    <section class="relative h-screen flex items-center justify-center overflow-hidden font-sans">
         <!-- Background Image Container -->
         <div class="absolute inset-0">
             <!-- Placeholder for the actual image of the supermarket aisle -->
@@ -30,7 +29,106 @@
         </div>
     </section>
     <!-- Majlis Tertinggi -->
+    @php
+        // Define the custom gradient for headings and card borders
+        $gradientClass = "bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)]";
 
-    <!-- AJK -->
+        // Data for Majlis Tertinggi (Top 3 members)
+        $majlisTertinggi = [
+            ['name' => 'Puan Siti Azrah Binti Razali', 'title' => 'Setiausaha', 'phone' => '01283765379', 'image_url' => 'https://placehold.co/300x400/D0D0D0/202020?text=Setiausaha'],
+            ['name' => 'En Imran Bin Kairon', 'title' => 'Pengerusi', 'phone' => '01283765379', 'image_url' => 'https://placehold.co/300x400/A0A0A0/101010?text=Pengerusi'],
+            ['name' => 'Mohammad Shahidan Bin Mohd Jali', 'title' => 'Bendahari', 'phone' => '01283765379', 'image_url' => 'https://placehold.co/300x400/C0C0C0/303030?text=Bendahari'],
+        ];
+
+        // Data for Ahli Jawatankuasa Lain (Other members - will be 4 per row)
+        $ahliJawatankuasaLain = [
+            ['name' => 'Puan Siti Azrah Binti Razali', 'title' => 'AJK Multimedia', 'phone' => '01283765379', 'image_url' => 'https://placehold.co/300x400/E0E0E0/404040?text=AJK+1'],
+            ['name' => 'Puan Siti Azrah Binti Razali', 'title' => 'AJK Perniagaan', 'phone' => '01283765379', 'image_url' => 'https://placehold.co/300x400/F0F0F0/505050?text=AJK+2'],
+            ['name' => 'Puan Siti Azrah Binti Razali', 'title' => 'AJK Perhubungan Luar', 'phone' => '01283765379', 'image_url' => 'https://placehold.co/300x400/B0B0B0/606060?text=AJK+3'],
+            ['name' => 'Puan Siti Azrah Binti Razali', 'title' => 'AJK Keselamtan', 'phone' => '01283765379', 'image_url' => 'https://placehold.co/300x400/D5D5D5/707070?text=AJK+4'],
+            ['name' => 'Puan Siti Azrah Binti Razali', 'title' => 'AJK Kerohanian', 'phone' => '01283765379', 'image_url' => 'https://placehold.co/300x400/B5B5B5/808080?text=AJK+5'],
+        ];
+    @endphp
+
+    <section class="py-16 md:py-20 bg-gray-100 font-sans">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+
+            <!-- Majlis Tertinggi Section Header -->
+            <div class="text-center mb-12">
+                <h3 class="inline-block px-12 py-3 text-xl font-bold text-white rounded-full shadow-lg {{ $gradientClass }} transform transition duration-300 hover:shadow-2xl">
+                    Majlis Tertinggi
+                </h3>
+            </div>
+
+            <!-- Majlis Tertinggi Grid (3 items per row on large screens) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+                @foreach ($majlisTertinggi as $member)
+                    <!-- Member Card -->
+                    <div class="ajk-card bg-white p-4 rounded-xl shadow-lg border border-gray-200 text-center transform transition duration-500 ease-in-out hover:shadow-xl hover:scale-[1.03] overflow-hidden group">
+                        
+                        <!-- Image with Gradient Border -->
+                        <div class="relative w-full h-72 mx-auto mb-4 rounded-lg overflow-hidden border-4 border-transparent group-hover:border-primary transition duration-500">
+                            <img src="{{ $member['image_url'] }}" 
+                                alt="{{ $member['name'] }}" 
+                                class="w-full h-full object-cover rounded-lg group-hover:scale-105 transition duration-500"
+                                onerror="this.onerror=null;this.src='https://placehold.co/300x400/D0D0D0/202020?text=Image+Not+Found'">
+                            
+                            <!-- Title Overlay -->
+                            <div class="absolute bottom-0 left-0 right-0 py-2 {{ $gradientClass }} text-white font-bold bg-opacity-90">
+                                {{ $member['title'] }}
+                            </div>
+                        </div>
+
+                        <!-- Name and Contact -->
+                        <h4 class="text-lg font-semibold text-gray-800 mt-2">
+                            {{ $member['name'] }}
+                        </h4>
+                        <p class="text-sm text-gray-500">
+                            {{ $member['phone'] }}
+                        </p>
+                    </div>
+                @endforeach
+            </div>
+
+
+            <!-- Ahli Jawatankuasa Lain Section Header -->
+            <div class="text-center mb-12">
+                <h3 class="inline-block px-12 py-3 text-xl font-bold text-white rounded-full shadow-lg {{ $gradientClass }} transform transition duration-300 hover:shadow-2xl">
+                    Ahli Jawatankuasa Lain
+                </h3>
+            </div>
+
+            <!-- Ahli Jawatankuasa Lain Grid (4 items per row on large screens) -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                @foreach ($ahliJawatankuasaLain as $member)
+                    <!-- Member Card -->
+                    <div class="ajk-card bg-white p-4 rounded-xl shadow-lg border border-gray-200 text-center transform transition duration-500 ease-in-out hover:shadow-xl hover:scale-[1.05] overflow-hidden group">
+                        
+                        <!-- Image with Gradient Border -->
+                        <div class="relative w-full h-48 mx-auto mb-4 rounded-lg overflow-hidden border-4 border-transparent group-hover:border-tertiary transition duration-500">
+                            <img src="{{ $member['image_url'] }}" 
+                                alt="{{ $member['name'] }}" 
+                                class="w-full h-full object-cover rounded-lg group-hover:scale-105 transition duration-500"
+                                onerror="this.onerror=null;this.src='https://placehold.co/300x400/D0D0D0/202020?text=Image+Not+Found'">
+                            
+                            <!-- Title Overlay -->
+                            <div class="absolute bottom-0 left-0 right-0 py-1 text-sm {{ $gradientClass }} text-white font-medium bg-opacity-90">
+                                {{ $member['title'] }}
+                            </div>
+                        </div>
+
+                        <!-- Name and Contact -->
+                        <h4 class="text-base font-semibold text-gray-800 mt-2">
+                            {{ $member['name'] }}
+                        </h4>
+                        <p class="text-xs text-gray-500">
+                            {{ $member['phone'] }}
+                        </p>
+                    </div>
+                @endforeach
+            </div>
+
+        </div>
+    </section>
 
 </x-app-layout>
