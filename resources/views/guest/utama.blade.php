@@ -9,7 +9,7 @@
             <!-- Text Section -->
             <div class="max-w-2xl">
             <h2 class="text-4xl md:text-5xl font-bold leading-tight">
-                <span class="text-[#c1121f]">Selamat Datang</span> ke<br />
+                <span class="text-white">Selamat Datang</span> ke<br />
                 <span class="text-white">Kampung Budiman</span>
             </h2>
 
@@ -51,7 +51,7 @@
 
             <!-- Left Content -->
             <div>
-            <h2 class="text-5xl font-extrabold text-[#c1121f] mb-6">PENGENALAN</h2>
+            <h2 class="text-5xl font-extrabold text-primary mb-6">PENGENALAN</h2>
 
             <p class="text-gray-700 leading-relaxed mb-4">
                 Kampung Budiman telah dibuka pada awal tahun <span class="font-semibold text-primary">1930–an</span> 
@@ -117,7 +117,7 @@
 
     <!-- Lokasi Kami -->
     <div>
-      <h2 class="text-3xl font-extrabold text-[#c1121f] mb-6 text-center lg:text-left">
+      <h2 class="text-3xl font-extrabold text-primary mb-6 flex justify-center lg:text-left">
         LOKASI KAMI
       </h2>
 
@@ -147,7 +147,7 @@
 
     <!-- Waktu Berurusan -->
     <div>
-      <h2 class="text-3xl font-extrabold text-[#c1121f] mb-6 text-center lg:text-left">
+      <h2 class="text-3xl font-extrabold text-primary mb-6 flex justify-center lg:text-left">
         WAKTU BERURUSAN
       </h2>
 
