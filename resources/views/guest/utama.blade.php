@@ -1,6 +1,6 @@
 <x-app-layout :title="'Utama'">
     <!-- Hero Section -->
-    <section class="relative bg-cover bg-center bg-no-repeat" style="background-image: url('/images/ilovekgbudiman.jpg');">
+    <section class="relative bg-cover h-screen bg-center bg-no-repeat flex item-center justify-center" style="background-image: url('/images/ilovekgbudiman.jpg');">
         <!-- Overlay -->
         <div class="absolute inset-0 bg-black/60"></div>
 
