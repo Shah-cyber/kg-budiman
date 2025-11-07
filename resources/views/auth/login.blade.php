@@ -49,9 +49,7 @@
                     Log Masuk Admin
                 </h2>
 
-                <form action="#" method="POST" class="space-y-6">
-                    @csrf
-                    
+                <form class="space-y-6">
                     <!-- Input E-mel -->
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
