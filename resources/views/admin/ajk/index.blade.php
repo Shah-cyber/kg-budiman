@@ -37,7 +37,7 @@
                         class="inline-block w-full px-4 py-3 rounded-lg transition duration-300 transform hover:scale-[1.01]
                         {{-- Logik Kelas Aktif: Guna gradient primary-tertiary --}}
                         @if ($isFasilitiActive)
-                            text-white bg-gradient-to-r from-primary-600 to-tertiary-600 shadow-xl shadow-primary-500/50 active font-semibold
+                            text-white bg-linear-to-r from-primary to-tertiary shadow-xl shadow-primary-500/50 active font-semibold
                         @else
                             hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white
                         @endif
