@@ -79,7 +79,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">Ketua Kampung</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">0123456726</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900 mr-4">Edit</a>
+                                    <a href="{{ route('admin.ajk.edit', 1) }}" class="text-indigo-600 hover:text-indigo-900 mr-4">Edit</a>
                                     <form action="#" method="POST" class="inline">
                                         @csrf
                                         @method('DELETE')
