@@ -56,6 +56,24 @@
                     Tambah Fasiliti
                 </a>
             </div>
+
+            {{-- search --}}
+            <div class="mb-6">
+                <label for="search" class="sr-only">Cari Fasiliti</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <!-- Search Icon (Lucide) -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 dark:text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.3-4.3"></path>
+                        </svg>
+                    </div>
+                    <input type="text" id="search" name="search" 
+                           class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg shadow-sm focus:border-secondary-500 focus:ring-secondary-500 dark:text-white text-sm" 
+                           placeholder="Cari mengikut Nama Fasiliti">
+                </div>
+            </div>
+
             {{-- table senarai ajk [no., gambar, nama ajk, jawatan, no. telefon ,action(edit, delete)] --}}
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-md">
