@@ -24,6 +24,8 @@ Route::get('/hubungi-kami', [GuestController::class, 'hubungiKami'])->name('hubu
 
 // Auth Routes
 Route::get('/login', [LoginController::class, 'login'])->name('login');
+// logout
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Admin Routes
 
