@@ -3,44 +3,68 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class WaktuBerurusanController extends Controller
 {
     public function index()
     {
-        // Logic to display business hours
-        return view('admin.waktu-berurusan.index');
+		$hours = $this->readHours();
+		return view('admin.waktu-berurusan.index', compact('hours'));
     }
 
     public function create()
     {
-        // Logic to show form to create new business hours
         return view('admin.waktu-berurusan.create');
     }
 
     public function store(Request $request)
     {
-        // Logic to store new business hours
-        // Validate and save the data
-        return redirect()->route('admin.waktu-berurusan.index');
+		$data = $request->validate([
+			'hours' => 'required|array',
+			'hours.*.day' => 'required|string',
+			'hours.*.time' => 'required|string',
+		]);
+
+		$this->writeHours($data['hours']);
+		return redirect()->route('admin.waktu-berurusan.index')->with('success', 'Waktu berurusan disimpan.');
     }
 
     public function edit($id)
     {
-        // Logic to show form to edit existing business hours
-        return view('admin.waktu-berurusan.edit', compact('id'));
+		$hours = $this->readHours();
+		return view('admin.waktu-berurusan.edit', compact('hours'));
     }
 
     public function update(Request $request, $id)
     {
-        // Logic to update existing business hours
-        // Validate and update the data
-        return redirect()->route('admin.waktu-berurusan.index');
+		$data = $request->validate([
+			'hours' => 'required|array',
+			'hours.*.day' => 'required|string',
+			'hours.*.time' => 'required|string',
+		]);
+		$this->writeHours($data['hours']);
+		return redirect()->route('admin.waktu-berurusan.index')->with('success', 'Waktu berurusan dikemas kini.');
     }
 
     public function delete($id)
     {
-        // Logic to delete existing business hours
-        return redirect()->route('admin.waktu-berurusan.index');
+		Storage::delete('business_hours.json');
+		return redirect()->route('admin.waktu-berurusan.index')->with('success', 'Waktu berurusan dipadam.');
     }
+
+	private function readHours(): array
+	{
+		if (!Storage::exists('business_hours.json')) {
+			return [];
+		}
+		$json = Storage::get('business_hours.json');
+		$data = json_decode($json, true);
+		return is_array($data) ? $data : [];
+	}
+
+	private function writeHours(array $hours): void
+	{
+		Storage::put('business_hours.json', json_encode($hours, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+	}
 }

@@ -2,18 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProfilController extends Controller
 {
     public function edit($id)
     {
-        // Logic to show the edit form for the profile with the given ID
-        return view('admin.profil.edit', compact('id'));
+		$user = User::where('userID', $id)->firstOrFail();
+		return view('admin.profil.edit', compact('user'));
     }
 
     public function update(Request $request, $id)
     {
-        // Logic to update the profile with the given ID
+		$user = User::where('userID', $id)->firstOrFail();
+
+		$data = $request->validate([
+			'name' => 'required|string|max:255',
+			'email' => 'required|email|unique:users,email,' . $user->userID . ',userID',
+			'password' => 'nullable|string|min:8|confirmed',
+		]);
+
+		$user->name = $data['name'];
+		$user->email = $data['email'];
+		if (!empty($data['password'])) {
+			$user->password = Hash::make($data['password']);
+		}
+		$user->save();
+
+		return redirect()->route('admin.profil.edit', ['id' => $user->userID])->with('success', 'Profil dikemas kini.');
     }
 }

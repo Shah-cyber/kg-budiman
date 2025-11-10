@@ -4,7 +4,7 @@
         <!-- Background Image Container -->
         <div class="absolute inset-0">
             <!-- Placeholder for the actual image of the supermarket aisle -->
-            <img src="{{ asset('images/ajk.jpg') }}"
+            <img src="{{ asset('images/kampung.png') }}"
                 alt="Supermarket Aisle Background"
                 class="w-full h-full object-cover">
                     

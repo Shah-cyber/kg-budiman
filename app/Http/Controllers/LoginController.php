@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -11,10 +12,28 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
+	public function authenticate(Request $request)
+	{
+		$credentials = $request->validate([
+			'email' => 'required|email',
+			'password' => 'required|string',
+		]);
+
+		if (Auth::attempt($credentials, $request->boolean('remember'))) {
+			$request->session()->regenerate();
+			return redirect()->intended(route('admin.utama'));
+		}
+
+		return back()->withErrors([
+			'email' => 'Kelayakan tidak sah.',
+		])->onlyInput('email');
+	}
+
     public function logout(Request $request)
     {
-        // Logic to log out the user
-
-        return redirect()->route('login');
+		Auth::logout();
+		$request->session()->invalidate();
+		$request->session()->regenerateToken();
+		return redirect()->route('login')->with('success', 'Anda telah log keluar.');
     }
 }
