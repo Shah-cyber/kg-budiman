@@ -9,6 +9,7 @@ use App\Http\Controllers\FasilitiController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\InfoKampungController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\PengungumanController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\WaktuBerurusanController;
@@ -55,12 +56,12 @@ Route::get('/admin/aktiviti/edit/{id}', [AktivitiController::class, 'edit'])->na
 Route::post('/admin/aktiviti/update/{id}', [AktivitiController::class, 'update'])->name('admin.aktiviti.update');
 Route::post('/admin/aktiviti/delete/{id}', [AktivitiController::class, 'delete'])->name('admin.aktiviti.delete');
 // Pengumuman Management
-Route::get('/admin/pengunguman', [PengungumanController::class, 'index'])->name('admin.pengunguman.index');
-Route::get('/admin/pengunguman/create', [PengungumanController::class, 'create'])->name('admin.pengunguman.create');
-Route::post('/admin/pengunguman/store', [PengungumanController::class, 'store'])->name('admin.pengunguman.store');
-Route::get('/admin/pengunguman/edit/{id}', [PengungumanController::class, 'edit'])->name('admin.pengunguman.edit');
-Route::post('/admin/pengunguman/update/{id}', [PengungumanController::class, 'update'])->name('admin.pengunguman.update');
-Route::post('/admin/pengunguman/delete/{id}', [PengungumanController::class, 'delete'])->name('admin.pengunguman.delete');
+Route::get('/admin/pengunguman', [PengumumanController::class, 'index'])->name('admin.pengunguman.index');
+Route::get('/admin/pengunguman/create', [PengumumanController::class, 'create'])->name('admin.pengunguman.create');
+Route::post('/admin/pengunguman/store', [PengumumanController::class, 'store'])->name('admin.pengunguman.store');
+Route::get('/admin/pengunguman/edit/{id}', [PengumumanController::class, 'edit'])->name('admin.pengunguman.edit');
+Route::post('/admin/pengunguman/update/{id}', [PengumumanController::class, 'update'])->name('admin.pengunguman.update');
+Route::post('/admin/pengunguman/delete/{id}', [PengumumanController::class, 'delete'])->name('admin.pengunguman.delete');
 // Budiman Biz Hub Management
 Route::get('/admin/budiman-biz-hub', [BizhubController::class, 'index'])->name('admin.bizhub.index');
 Route::get('/admin/budiman-biz-hub/create', [BizhubController::class, 'create'])->name('admin.bizhub.create');
