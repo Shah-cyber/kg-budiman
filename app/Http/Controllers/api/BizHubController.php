@@ -61,6 +61,20 @@ class BizHubController extends Controller
         ]);
     }
 
+    public function get_specific_bizhub($id)
+    {
+        $vendor = bizhub::find($id);
+        if (!$vendor) {
+            return $this->apiHelper->resp([
+                'error' => 'Vendor not found'
+            ], 404);
+        }
+
+        return $this->apiHelper->resp([
+            'vendor' => $vendor
+        ]);
+    }
+
     public function update_bizhub(Request $request, $id)
     {
         $vendor = bizhub::find($id);

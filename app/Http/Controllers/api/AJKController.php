@@ -63,6 +63,18 @@ class AJKController extends Controller
         ]);
     }
 
+    public function get_specific_jawatan_kuasa($id)
+    {
+        $member = CommitteeMember::find($id);
+        if (!$member) {
+            return $this->apiHelper->resp(['error' => 'Committee member not found'], 404);
+        }
+
+        return $this->apiHelper->resp([
+            'member' => $member
+        ]);
+    }
+
     public function delete_jawatan_kuasa($id)
     {
         $member = CommitteeMember::find($id);

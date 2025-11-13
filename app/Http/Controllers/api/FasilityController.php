@@ -126,4 +126,18 @@ class FasilityController extends Controller
             'facility' => $facility
         ]);
     }
+
+    public function get_specific_fasiliti($id)
+    {
+        $facility = Facility::find($id);
+        if (!$facility) {
+            return $this->apiHelper->resp([
+                'error' => 'Facility not found'
+            ], 404);
+        }
+
+        return $this->apiHelper->resp([
+            'facility' => $facility
+        ]);
+    }
 }

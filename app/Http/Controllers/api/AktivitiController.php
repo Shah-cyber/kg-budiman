@@ -137,4 +137,16 @@ class AktivitiController extends Controller
             'activity' => $activity
         ]);
     }
+
+    public function get_specific_aktiviti($id)
+    {
+        $activity = Activity::find($id);
+        if (!$activity) {
+            return $this->apiHelper->resp(['error' => 'Activity not found'], 404);
+        }
+
+        return $this->apiHelper->resp([
+            'activity' => $activity
+        ]);
+    }
 }
