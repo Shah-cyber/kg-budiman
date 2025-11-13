@@ -89,3 +89,5 @@ Route::post('/admin/akses-admin/store', [AksesAdminController::class, 'store'])-
 Route::get('/admin/akses-admin/edit/{id}', [AksesAdminController::class, 'edit'])->name('admin.akses-admin.edit');
 Route::post('/admin/akses-admin/update/{id}', [AksesAdminController::class, 'update'])->name('admin.akses-admin.update');
 Route::post('/admin/akses-admin/delete/{id}', [AksesAdminController::class, 'delete'])->name('admin.akses-admin.delete');
+
+require __DIR__.'/api.php';
