@@ -88,106 +88,76 @@
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Tindakan</th>
                         </tr>
                     </thead>
-                <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">                
+                <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">          
+                          
                     <!-- Contoh Baris 1 -->
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">1</td>
-                        
-                        {{-- KAROUSEL GAMBAR --}}
-                        <td class="px-6 py-4">
-                            <div class="relative w-36 h-24 rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-700" id="carousel-container-1">
-                                <!-- Imej akan dimasukkan oleh JavaScript (dibiarkan kosong pada permulaan) -->
-                                <img id="carousel-img-1" src="" alt="Gambar Aktiviti" class="w-full h-full object-cover transition-opacity duration-300">
-                                
-                                <!-- Butang Kiri -->
-                                <button onclick="navigateCarousel('1', -1)" 
-                                        class="absolute left-0 top-1/2 -translate-y-1/2 p-1 bg-black/40 hover:bg-black/70 text-white transition rounded-r-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                                </button>
-                                
-                                <!-- Butang Kanan -->
-                                <button onclick="navigateCarousel('1', 1)" 
-                                        class="absolute right-0 top-1/2 -translate-y-1/2 p-1 bg-black/40 hover:bg-black/70 text-white transition rounded-l-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                                </button>
+                    @foreach ($activities as $index => $activity)
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                {{ $loop->iteration }}
+                            </td>
 
-                                <!-- Indicator Teks -->
-                                <div id="carousel-indicator-1" class="absolute bottom-1 right-1 text-xs px-1 bg-black/50 text-white rounded">
-                                    0/0
+                            {{-- KAROUSEL GAMBAR --}}
+                            <td class="px-6 py-4">
+                                <div class="relative w-36 h-24 rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-700" id="carousel-container-{{ $index +1}}">
+                                    <!-- Imej akan dimasukkan oleh JavaScript -->
+                                    <img id="carousel-img-{{ $index+1 }}" src="" alt="Gambar Aktiviti" class="w-full h-full object-cover transition-opacity duration-300">
+                                    
+                                    <!-- Butang Kiri -->
+                                    <button onclick="navigateCarousel('{{ $index }}', -1)" 
+                                            class="absolute left-0 top-1/2 -translate-y-1/2 p-1 bg-black/40 hover:bg-black/70 text-white transition rounded-r-lg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m15 18-6-6 6-6"/>
+                                        </svg>
+                                    </button>
+                                    
+                                    <!-- Butang Kanan -->
+                                    <button onclick="navigateCarousel('{{ $index + 1 }}', 1)" 
+                                            class="absolute right-0 top-1/2 -translate-y-1/2 p-1 bg-black/40 hover:bg-black/70 text-white transition rounded-l-lg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m9 18 6-6-6-6"/>
+                                        </svg>
+                                    </button>
+
+                                    <!-- Indicator Teks -->
+                                    <div id="carousel-indicator-{{ $index + 1 }}" class="absolute bottom-1 right-1 text-xs px-1 bg-black/50 text-white rounded">
+                                        0/0
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        {{-- END KAROUSEL GAMBAR --}}
+                            </td>
+                            {{-- END KAROUSEL GAMBAR --}}
 
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">Kejohanan Sukan Kampung Budiman</td>
-                        <td class="px-6 py-4 max-w-xs text-sm text-gray-900 dark:text-gray-100 truncate">Program ini dilaksanakan di padang sekolah rendah Tangkak Jawa selama 2 hari.</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">12/10/2025</td>
-                        
-                        {{-- Tagging --}}
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary-800 dark:bg-primary-900 dark:text-primary-300 mb-1">Sukan</span>
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary-800 dark:bg-primary-900 dark:text-primary-300 mb-1">Komuniti</span>
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary-800 dark:bg-primary-900 dark:text-primary-300 mb-1">Kampung Budiman</span>
-                        </td>
-                        
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <a href="{{ route('admin.aktiviti.edit', 1) }}" class="text-indigo-600 hover:text-indigo-900 mr-4">Edit</a>
-                            <form action="#" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:text-red-800" onclick="return confirm('Adakah anda pasti mahu memadam aktiviti ini?')">Padam</button>
-                            </form>
-                        </td>
-                    </tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+                                {{ $activity->title }}
+                            </td>
+                            <td class="px-6 py-4 max-w-xs text-sm text-gray-900 dark:text-gray-100 truncate">
+                                {{ $activity->description }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+                                {{ \Carbon\Carbon::parse($activity->date)->format('d/m/Y') }}
+                            </td>
 
-                    <!-- Contoh Baris 2 (Untuk demonstrasi multi-row carousel) -->
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">2</td>
-                        
-                        {{-- KAROUSEL GAMBAR --}}
-                        <td class="px-6 py-4">
-                            <div class="relative w-36 h-24 rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-700" id="carousel-container-2">
-                                <!-- Perhatikan: ID di sini adalah 'carousel-img-2' -->
-                                <img id="carousel-img-2" src="" alt="Gambar Aktiviti" class="w-full h-full object-cover transition-opacity duration-300">
-                                
-                                <!-- Butang Kiri -->
-                                <button onclick="navigateCarousel('2', -1)" 
-                                        class="absolute left-0 top-1/2 -translate-y-1/2 p-1 bg-black/40 hover:bg-black/70 text-white transition rounded-r-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                                </button>
-                                
-                                <!-- Butang Kanan -->
-                                <button onclick="navigateCarousel('2', 1)" 
-                                        class="absolute right-0 top-1/2 -translate-y-1/2 p-1 bg-black/40 hover:bg-black/70 text-white transition rounded-l-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                                </button>
+                            {{-- Tagging --}}
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+                                {{-- @foreach ($activity->tags as $tag)
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary-800 dark:bg-primary-900 dark:text-primary-300 mb-1">
+                                        {{ $tag }}
+                                    </span>
+                                @endforeach --}}
+                            </td>
 
-                                <!-- Indicator Teks -->
-                                <div id="carousel-indicator-2" class="absolute bottom-1 right-1 text-xs px-1 bg-black/50 text-white rounded">
-                                    0/0
-                                </div>
-                            </div>
-                        </td>
-                        {{-- END KAROUSEL GAMBAR --}}
-
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">Gotong Royong Perdana</td>
-                        <td class="px-6 py-4 max-w-xs text-sm text-gray-900 dark:text-gray-100 truncate">Membersihkan kawasan surau dan tanah perkuburan pada hujung minggu.</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">01/01/2026</td>
-                        
-                        {{-- Tagging --}}
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary-800 dark:bg-primary-900 dark:text-primary-300 mb-1">Kebersihan</span>
-                        </td>
-                        
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <a href="{{ route('admin.aktiviti.edit', 2) }}" class="text-indigo-600 hover:text-indigo-900 mr-4">Edit</a>
-                            <form action="#" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:text-red-800" onclick="return confirm('Adakah anda pasti mahu memadam aktiviti ini?')">Padam</button>
-                            </form>
-                        </td>
-                    </tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                {{-- <a href="{{ route('admin.aktiviti.edit', $activity->id) }}" class="text-indigo-600 hover:text-indigo-900 mr-4">Edit</a> --}}
+                                {{-- <form action="{{ route('admin.aktiviti.destroy', $activity->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:text-red-800" onclick="return confirm('Adakah anda pasti mahu memadam aktiviti ini?')">
+                                        Padam
+                                    </button>
+                                </form> --}}
+                            </td>
+                        </tr>
+                        @endforeach
 
                 </tbody>
                 </table>
@@ -198,21 +168,18 @@
     <script>
         // Data placeholder untuk karousel menggunakan picsum.photos yang bersaiz kecil
         const activityImages = {
-            '1': [
-                "https://picsum.photos/seed/sports1/150/100", // Baris 1, Imej 1
-                "https://picsum.photos/seed/sports2/150/100", // Baris 1, Imej 2
-                "https://picsum.photos/seed/sports3/150/100"  // Baris 1, Imej 3
-            ],
-            '2': [
-                "https://picsum.photos/seed/gotong1/150/100", // Baris 2, Imej 1
-                "https://picsum.photos/seed/gotong2/150/100"  // Baris 2, Imej 2
-            ]
+            @foreach ($activities as $index => $activity) @php $array = explode(',', $activity->image_path);@endphp 
+            "{{ $index +1}}": [@foreach ($array as $index => $img)
+                "{{ "../storage/".$img }}" @if(!$loop->last),@endif
+            @endforeach]
+                @if(!$loop->last),@endif @endforeach
         };
 
         // Simpan state karousel
         const carouselState = {
             '1': 0, // Baris ID 1, imej pertama (indeks 0)
-            '2': 0  // Baris ID 2, imej pertama (indeks 0)
+            '2': 0,  // Baris ID 2, imej pertama (indeks 0)
+            '3': 0  // Baris ID 3, imej pertama (indeks 0)
         };
 
         /**

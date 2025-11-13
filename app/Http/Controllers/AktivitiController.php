@@ -10,7 +10,7 @@ class AktivitiController extends Controller
 {
     public function index()
     {
-		$activities = Activity::orderBy('activity_date', 'desc')->paginate(15);
+		$activities = Activity::orderBy('activity_date', 'desc')->get();
 		return view('admin.aktiviti.index', compact('activities'));
     }
 
