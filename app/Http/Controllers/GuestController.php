@@ -9,6 +9,8 @@ use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+use App\Models\Facility;
+
 class GuestController extends Controller
 {
     public function utama()
@@ -62,7 +64,8 @@ class GuestController extends Controller
 
     public function fasiliti()
     {
-        return view('guest.fasiliti');
+        $fasiliti = Facility::orderBy('created_at', 'desc')->get();
+        return view('guest.fasiliti', compact('fasiliti'));
     }
 
     public function aktiviti()
