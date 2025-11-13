@@ -22,6 +22,8 @@ Route::prefix('api')->group(function () {
     Route::controller(activity::class)->group(function () {
         Route::get('/aktiviti', 'get_aktiviti');
         Route::post('/aktiviti', 'add_aktiviti');
+        Route::delete('/aktiviti/{id}', 'delete_aktiviti');
+        Route::patch('/aktiviti/{id}', 'update_aktiviti');
     });
 
     Route::controller(bizhub::class)->group(function () {

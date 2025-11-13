@@ -81,20 +81,8 @@ class GuestController extends Controller
                 // Helper function to convert path to URL
                 $pathToUrl = function ($path) {
                     $path = trim($path);
-                    // If already a full URL, return as is
-                    if (filter_var($path, FILTER_VALIDATE_URL)) {
-                        return $path;
-                    }
-                    // If starts with http:// or https://, return as is
-                    if (strpos($path, 'http://') === 0 || strpos($path, 'https://') === 0) {
-                        return $path;
-                    }
-                    // If starts with storage/ or is a storage path, use Storage::url()
-                    if (strpos($path, 'storage/') === 0 || strpos($path, 'public/') === 0) {
+
                         return Storage::url($path);
-                    }
-                    // Otherwise, assume it's in public folder and use asset()
-                    return asset($path);
                 };
                 
                 // Try to decode as JSON first
@@ -121,7 +109,7 @@ class GuestController extends Controller
                 'tags' => $tags,
             ];
         })->toArray();
-        
+
         // Fetch announcements from database
         $announcements = Announcement::where('start_date', '<=', now())
             ->where(function ($query) {
