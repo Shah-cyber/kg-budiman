@@ -55,7 +55,7 @@
 
     <!-- Search Button -->
     <div>
-      <button
+      <button onclick="window.location.href='{{ config('app.eaduan_url') }}'"
         class="flex items-center text-white bg-linear-to-r from-primary to-tertiary hover:from-tertiary hover:to-primary font-medium rounded-full text-sm px-5 py-2.5 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105"
       >
         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2"
@@ -63,7 +63,7 @@
           <path stroke-linecap="round" stroke-linejoin="round"
                 d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z"></path>
         </svg>
-        Carian
+        E-aduan
       </button>
     </div>
   </div>

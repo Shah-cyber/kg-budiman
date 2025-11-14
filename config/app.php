@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    'eaduan_url' => env('EADUAN_URL', 'http://localhost:8001'),
     /*
     |--------------------------------------------------------------------------
     | Application Name
