@@ -95,6 +95,9 @@
         <a href="{{ route('hubungi-kami') }}" class="block px-4 py-2 text-black hover:bg-gray-100 rounded-md font-poppins text-sm">
           Hubungi Kami
         </a>
+        <a href="{{ config('app.eaduan_url') }}" class="block px-4 py-2 text-black hover:bg-gray-100 rounded-md font-poppins text-sm">
+          E-aduan
+        </a>
       </div>
     </div>
 
