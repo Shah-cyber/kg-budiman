@@ -23,7 +23,7 @@
 
             <!-- CTA Button -->
             <div class="mt-8">
-                <a href="#"
+                <a href="#video-360"
                 class="inline-flex items-center px-5 py-3 text-sm font-medium rounded-lg text-white
                         bg-linear-to-r from-primary to-tertiary
                         hover:opacity-90 transition">
@@ -31,7 +31,7 @@
                 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" stroke-width="2"
                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z"></path>
+                        d="M19 9l-7 7-7-7"></path>
                 </svg>
                 </a>
             </div>
@@ -46,7 +46,7 @@
     </section>
 
     <!-- 360 Video Section -->
-    <section class="py-20 bg-gray-50">
+    <section id="video-360" class="py-20 bg-gray-50 scroll-mt-20">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-12 intersect:motion-preset-fade intersect:motion-ease-spring-bouncier">
                 <h2 class="text-4xl md:text-5xl font-extrabold text-primary mb-4">
@@ -73,7 +73,7 @@
                     <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                     </svg>
-                    Seret untuk melihat pandangan 360° atau gunakan kawalan untuk navigasi
+                    Tarik layar video untuk melihat pandangan 360° atau gunakan kawalan untuk navigasi
                 </p>
             </div>
         </div>

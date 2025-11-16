@@ -73,14 +73,14 @@
             <!-- Header Section -->
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2">
-                    Cari Perniagaan Mengikut Kategori
+                    Terokai Usahawan Tempatan Kg Budiman
                 </h2>
                 <p class="text-gray-600 text-lg">
-                    Pilih kategori untuk melihat perniagaan yang berkaitan
+                    Pilih jenis perniagaan untuk melihat penawaran mereka
                 </p>
             </div>
 
-            <!-- Category Tabs/Filters -->
+            {{-- <!-- Category Tabs/Filters -->
             <div class="flex flex-wrap justify-center gap-3 mb-12">
 
                 @php
@@ -127,27 +127,27 @@
                         </button>
                     @endif
                 @endforeach
-            </div>
+            </div> --}}
 
             <!-- Business Listings Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
                 @forelse ($vendors ?? [] as $vendor)
                 <!-- Card for a Single Business -->
-                <div class="bg-white rounded-xl shadow-xl overflow-hidden transform hover:scale-[1.02] transition duration-300 ease-in-out border border-gray-100">
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden transform hover:scale-[1.02] transition duration-300 ease-in-out border border-gray-100 flex flex-col h-full">
                     
                     <!-- Business Image -->
                     @if (!empty($vendor['image_path']))
                         <img src="..{{ $vendor['image_path'] }}" 
                             alt="{{ $vendor['name'] }}" 
-                            class="w-full h-48 object-cover">
+                            class="w-full h-48 object-cover shrink-0">
                     @else
                         <img src="https://placehold.co/600x400/D0D0D0/202020?text={{ urlencode($vendor['name']) }}" 
                             alt="{{ $vendor['name'] }}" 
-                            class="w-full h-48 object-cover">
+                            class="w-full h-48 object-cover shrink-0">
                     @endif
                     
-                    <div class="p-6">
+                    <div class="p-6 flex flex-col flex-1">
                         <!-- Business Name -->
                         <h3 class="text-xl font-bold text-gray-900 mb-2">
                             {{ $vendor['name'] }}
@@ -181,8 +181,28 @@
                             </div>
                         </div>
 
+                        <!-- Spacer to push button to bottom -->
+                        <div class="flex-1"></div>
+
                         <!-- Call to Action Button with Gradient -->
-                        <a href="tel:{{ $vendor['phone_number'] ?? '' }}" class="block w-full mt-6 px-4 py-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out {{ $gradientClass }} focus:outline-none focus:ring-1 focus:ring-opacity-50 focus:ring-primary text-center hover:shadow-lg">
+                        @php
+                            $phoneNumber = $vendor['phone_number'] ?? $vendor->phone_number ?? '';
+                            // Format phone number for WhatsApp (remove all non-numeric characters)
+                            $cleanPhone = preg_replace('/[^0-9]/', '', $phoneNumber);
+                            // Format for WhatsApp: ensure it has Malaysia country code (60)
+                            if (!empty($cleanPhone)) {
+                                // If starts with 0, replace with 60 (Malaysia country code)
+                                if (substr($cleanPhone, 0, 1) === '0') {
+                                    $cleanPhone = '60' . substr($cleanPhone, 1);
+                                }
+                                // If doesn't start with country code 60, add it
+                                elseif (substr($cleanPhone, 0, 2) !== '60') {
+                                    $cleanPhone = '60' . $cleanPhone;
+                                }
+                            }
+                            $whatsappUrl = !empty($cleanPhone) ? 'https://wa.me/' . $cleanPhone : '#';
+                        @endphp
+                        <a href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer" class="block w-full mt-6 px-4 py-3 rounded-lg text-white font-semibold shadow-md transition duration-300 ease-in-out {{ $gradientClass }} focus:outline-none focus:ring-1 focus:ring-opacity-50 focus:ring-primary text-center hover:shadow-lg">
                             Klik untuk tempahan
                         </a>
                     </div>
