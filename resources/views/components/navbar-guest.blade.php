@@ -98,14 +98,14 @@
       </div>
     </div>
 
-    <!-- Search Button -->
+    <!-- E-aduan Button -->
     <div class="hidden md:block">
       <button onclick="window.location.href='{{ config('app.eaduan_url') }}'"
         class="flex items-center text-white bg-linear-to-r from-primary to-tertiary hover:from-tertiary hover:to-primary font-medium rounded-full text-sm px-5 py-2.5 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105">
         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2"
              viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round"
-                d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z"></path>
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
         </svg>
         E-aduan
       </button>

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'eaduan_url' => env('EADUAN_URL', 'http://localhost:8001'),
+    'eaduan_url' => env('EADUAN_URL', 'http://localhost:8001/user'),
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Kuala_Lumpur',
 
     /*
     |--------------------------------------------------------------------------
