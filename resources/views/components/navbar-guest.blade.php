@@ -45,6 +45,11 @@
                 Fasiliti
               </a>
             </li>
+            <li>
+              <a href="{{ route('sejarah') }}" class="block px-4 py-3 hover:bg-linear-to-r hover:from-secondary hover:to-primary hover:text-white font-poppins text-sm transition-all rounded-md mx-1">
+                Sejarah
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -82,6 +87,9 @@
             </a>
             <a href="{{ route('fasiliti') }}" class="block px-8 py-2 text-gray-700 hover:bg-gray-100 font-poppins text-sm">
               Fasiliti
+            </a>
+            <a href="{{ route('sejarah') }}" class="block px-8 py-2 text-gray-700 hover:bg-gray-100 font-poppins text-sm">
+              Sejarah
             </a>
           </div>
         </div>
