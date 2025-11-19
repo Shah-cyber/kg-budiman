@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 use App\Models\Vendor as bizhub;
-use App\ApiHelper;
+use App\ApiHelper as API;
 
 class BizHubController extends Controller
 {
@@ -19,7 +19,7 @@ class BizHubController extends Controller
     public function get_bizhub(Request $request)
     {
         $data = bizhub::all();
-        return $this->apiHelper->resp([
+        return API::resp([
             'bizhub' => $data
         ]);
     }
@@ -29,10 +29,10 @@ class BizHubController extends Controller
         $receivedData = json_decode($request->getContent(), true);
 
         $requiredFields = ['name', 'phone_number', 'service', 'location', 'operation_time', 'image_base64', 'status'];
-        $fieldCheck = $this->apiHelper->fieldChecker($receivedData, $requiredFields);
+        $fieldCheck = API::fieldChecker($receivedData, $requiredFields);
 
         if ($fieldCheck) {
-            return $this->apiHelper->resp([
+            return API::resp([
                 'error' => $fieldCheck['error'],
                 'missing_fields' => $fieldCheck['missing_fields']
             ], 400);
@@ -55,7 +55,7 @@ class BizHubController extends Controller
         $vendor->status = $receivedData['status'];
         $vendor->save();
 
-        return $this->apiHelper->resp([
+        return API::resp([
             'message' => 'BizHub vendor added successfully',
             'vendor' => $vendor
         ]);
@@ -65,12 +65,12 @@ class BizHubController extends Controller
     {
         $vendor = bizhub::find($id);
         if (!$vendor) {
-            return $this->apiHelper->resp([
+            return API::resp([
                 'error' => 'Vendor not found'
             ], 404);
         }
 
-        return $this->apiHelper->resp([
+        return API::resp([
             'vendor' => $vendor
         ]);
     }
@@ -79,7 +79,7 @@ class BizHubController extends Controller
     {
         $vendor = bizhub::find($id);
         if (!$vendor) {
-            return $this->apiHelper->resp([
+            return API::resp([
                 'error' => 'Vendor not found'
             ], 404);
         }
@@ -88,6 +88,11 @@ class BizHubController extends Controller
 
         foreach ($receivedData as $key => $value) {
             if ($key === 'image_base64') {
+                
+                if ($vendor->image_path && Storage::disk('public')->exists($vendor->image_path)) {
+                    Storage::disk('public')->delete($vendor->image_path);
+                }
+
                 $base64 = $value;
                 $imageData = base64_decode($base64);
                 
@@ -101,7 +106,7 @@ class BizHubController extends Controller
 
         $vendor->save();
 
-        return $this->apiHelper->resp([
+        return API::resp([
             'message' => 'BizHub vendor updated successfully',
             'vendor' => $vendor
         ]);
@@ -111,14 +116,14 @@ class BizHubController extends Controller
     {
         $vendor = bizhub::find($id);
         if (!$vendor) {
-            return $this->apiHelper->resp([
+            return API::resp([
                 'error' => 'Vendor not found'
             ], 404);
         }
 
         $vendor->delete();
 
-        return $this->apiHelper->resp([
+        return API::resp([
             'message' => 'BizHub vendor deleted successfully'
         ]);
     }

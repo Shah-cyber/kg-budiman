@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 // Models
 use App\Models\Activity;
-use App\ApiHelper;
+use App\ApiHelper as API;
 
 class AktivitiController extends Controller
 {
@@ -20,7 +20,7 @@ class AktivitiController extends Controller
     public function get_aktiviti(Request $request)
     {
         $data = Activity::all();
-        return $this->apiHelper->resp([
+        return API::resp([
             'aktiviti' => $data
         ]);
     }
@@ -31,10 +31,10 @@ class AktivitiController extends Controller
         $receivedData = json_decode($request->getContent(), true);
 
         $requiredFields = ['title', 'description', 'date', 'images'];
-        $fieldCheck = $this->apiHelper->fieldChecker($receivedData, $requiredFields);
+        $fieldCheck = API::fieldChecker($receivedData, $requiredFields);
 
         if ($fieldCheck) {
-            return $this->apiHelper->resp([
+            return API::resp([
                 'error' => $fieldCheck['error'],
                 'missing_fields' => $fieldCheck['missing_fields']
             ], 400);
@@ -59,7 +59,7 @@ class AktivitiController extends Controller
         $activity->image_path = implode(',', $imagesPath);
         $activity->save();
 
-        return $this->apiHelper->resp([
+        return API::resp([
             'message' => 'Activity added successfully',
             'activity' => $activity
         ]);
@@ -69,7 +69,7 @@ class AktivitiController extends Controller
     {
         $activity = Activity::find($id);
         if (!$activity) {
-            return $this->apiHelper->resp([
+            return API::resp([
                 'error' => 'Activity not found'
             ], 404);
         }
@@ -84,7 +84,7 @@ class AktivitiController extends Controller
 
         $activity->delete();
 
-        return $this->apiHelper->resp([
+        return API::resp([
             'message' => 'Activity deleted successfully'
         ]);
     }
@@ -93,7 +93,7 @@ class AktivitiController extends Controller
     {
         $activity = Activity::find($id);
         if (!$activity) {
-            return $this->apiHelper->resp([
+            return API::resp([
                 'error' => 'Activity not found'
             ], 404);
         }
@@ -132,7 +132,7 @@ class AktivitiController extends Controller
 
         $activity->save();
 
-        return $this->apiHelper->resp([
+        return API::resp([
             'message' => 'Activity updated successfully',
             'activity' => $activity
         ]);
@@ -142,10 +142,10 @@ class AktivitiController extends Controller
     {
         $activity = Activity::find($id);
         if (!$activity) {
-            return $this->apiHelper->resp(['error' => 'Activity not found'], 404);
+            return API::resp(['error' => 'Activity not found'], 404);
         }
 
-        return $this->apiHelper->resp([
+        return API::resp([
             'activity' => $activity
         ]);
     }

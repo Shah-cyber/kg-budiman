@@ -4,15 +4,7 @@ namespace App;
 
 class ApiHelper
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    public function resp($data, $internalStatus = 200)
+    public static function resp($data, $internalStatus = 200)
     {
         $headers = [
             "Content-Type" => "application/json"
@@ -20,7 +12,7 @@ class ApiHelper
         return response()->json($data, $internalStatus, $headers);
     }
 
-    public function fieldChecker($receivedData, $requiredFields)
+    public static function fieldChecker($receivedData, $requiredFields)
     {
         $missingFields = [];
 

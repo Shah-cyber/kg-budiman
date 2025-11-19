@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\ApiHelper;
+use App\ApiHelper as API;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -20,7 +20,7 @@ class FasilityController extends Controller
     public function get_fasiliti(Request $request)
     {
         $data = Facility::all();
-        return $this->apiHelper->resp([
+        return API::resp([
             'fasiliti' => $data
         ]);
     }
@@ -30,10 +30,10 @@ class FasilityController extends Controller
         $receivedData = json_decode($request->getContent(), true);
 
         $requiredFields = ['name', 'description', 'location', 'image_base64', 'is_available'];
-        $fieldCheck = $this->apiHelper->fieldChecker($receivedData, $requiredFields);
+        $fieldCheck = API::fieldChecker($receivedData, $requiredFields);
 
         if ($fieldCheck) {
-            return $this->apiHelper->resp([
+            return API::resp([
                 'error' => $fieldCheck['error'],
                 'missing_fields' => $fieldCheck['missing_fields']
             ], 400);
@@ -54,7 +54,7 @@ class FasilityController extends Controller
         $facility->is_available = $receivedData['is_available'] == "true" ? 1 : 0;
         $facility->save();
 
-        return $this->apiHelper->resp([
+        return API::resp([
             'message' => 'Facility added successfully',
             'facility' => $facility
         ], 201);
@@ -64,7 +64,7 @@ class FasilityController extends Controller
     {
         $facility = Facility::find($id);
         if (!$facility) {
-            return $this->apiHelper->resp([
+            return API::resp([
                 'error' => 'Facility not found'
             ], 404);
         }
@@ -76,7 +76,7 @@ class FasilityController extends Controller
 
         $facility->delete();
 
-        return $this->apiHelper->resp([
+        return API::resp([
             'message' => 'Facility deleted successfully'
         ]);
     }
@@ -85,7 +85,7 @@ class FasilityController extends Controller
     {
         $facility = Facility::find($id);
         if (!$facility) {
-            return $this->apiHelper->resp([
+            return API::resp([
                 'error' => 'Facility not found'
             ], 404);
         }
@@ -121,7 +121,7 @@ class FasilityController extends Controller
 
         $facility->save();
 
-        return $this->apiHelper->resp([
+        return API::resp([
             'message' => 'Facility updated successfully',
             'facility' => $facility
         ]);
@@ -131,12 +131,12 @@ class FasilityController extends Controller
     {
         $facility = Facility::find($id);
         if (!$facility) {
-            return $this->apiHelper->resp([
+            return API::resp([
                 'error' => 'Facility not found'
             ], 404);
         }
 
-        return $this->apiHelper->resp([
+        return API::resp([
             'facility' => $facility
         ]);
     }

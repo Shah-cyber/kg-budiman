@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\ApiHelper;
+use App\ApiHelper as API;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -14,15 +14,10 @@ use App\Models\CommitteeMember;
 class AJKController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->apiHelper = new ApiHelper();
-    }
-
     public function get_jawatan_kuasa(Request $request)
     {
         $data = CommitteeMember::all();
-        return $this->apiHelper->resp([
+        return API::resp([
             'jawatan_kuasa' => $data
         ]);
     }
@@ -31,16 +26,16 @@ class AJKController extends Controller
     public function add_jawatan_kuasa(Request $request)
     {
         if (!$request->isJson()) {
-            return $this->apiHelper->resp(['error' => 'Invalid JSON'], 400);
+            return API::resp(['error' => 'Invalid JSON'], 400);
         }
 
         $receivedData = json_decode($request->getContent(), true);
 
         $requiredFields = ['name', 'position', 'phone_number', 'image_base64'];
-        $checker = $this->apiHelper->fieldChecker($receivedData, $requiredFields);
+        $checker = API::fieldChecker($receivedData, $requiredFields);
 
         if ($checker) {
-            return $this->apiHelper->resp($checker, 400);
+            return API::resp($checker, 400);
         }
 
         $imageBase64 = $receivedData['image_base64'];
@@ -57,7 +52,7 @@ class AJKController extends Controller
             'photo_path' => 'ajk/' . $imageName,
         ]);
 
-        return $this->apiHelper->resp([
+        return API::resp([
             'message' => 'Committee member added successfully',
             'member' => $member
         ]);
@@ -67,10 +62,10 @@ class AJKController extends Controller
     {
         $member = CommitteeMember::find($id);
         if (!$member) {
-            return $this->apiHelper->resp(['error' => 'Committee member not found'], 404);
+            return API::resp(['error' => 'Committee member not found'], 404);
         }
 
-        return $this->apiHelper->resp([
+        return API::resp([
             'member' => $member
         ]);
     }
@@ -79,7 +74,7 @@ class AJKController extends Controller
     {
         $member = CommitteeMember::find($id);
         if (!$member) {
-            return $this->apiHelper->resp(['error' => 'Committee member not found'], 404);
+            return API::resp(['error' => 'Committee member not found'], 404);
         }
 
         // Delete the associated image
@@ -87,18 +82,18 @@ class AJKController extends Controller
 
         $member->delete();
 
-        return $this->apiHelper->resp(['message' => 'Committee member deleted successfully']);
+        return API::resp(['message' => 'Committee member deleted successfully']);
     }
 
     public function update_jawatan_kuasa(Request $request, $id)
     {
         if (!$request->isJson()) {
-            return $this->apiHelper->resp(['error' => 'Invalid JSON'], 400);
+            return API::resp(['error' => 'Invalid JSON'], 400);
         }
 
         $member = CommitteeMember::find($id);
         if (!$member) {
-            return $this->apiHelper->resp(['error' => 'Committee member not found'], 404);
+            return API::resp(['error' => 'Committee member not found'], 404);
         }
 
         $receivedData = json_decode($request->getContent(), true);
@@ -128,7 +123,7 @@ class AJKController extends Controller
 
         $member->save();
 
-        return $this->apiHelper->resp([
+        return API::resp([
             'message' => 'Committee member updated successfully',
             'member' => $member
         ]);

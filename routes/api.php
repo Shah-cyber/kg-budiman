@@ -5,6 +5,7 @@ use App\Http\Controllers\api\AJKController as ajk;
 use App\Http\Controllers\api\FasilityController as fasility;
 use App\Http\Controllers\api\AktivitiController as activity;
 use App\Http\Controllers\api\BizHubController as bizhub;
+use App\Http\Controllers\api\AnnouncementController as announcement;
 
 Route::prefix('api')->group(function () {
 
@@ -38,5 +39,13 @@ Route::prefix('api')->group(function () {
         Route::post('/bizhub', 'add_bizhub');
         Route::patch('/bizhub/{id}', 'update_bizhub');
         Route::delete('/bizhub/{id}', 'delete_bizhub');
+    });
+
+    Route::controller(announcement::class)->group(function () {
+        Route::get('/announcement', 'get_announcements');
+        Route::get('/announcement/{id}', 'get_specific_announcement');
+        Route::post('/announcement', 'add_announcement');
+        Route::patch('/announcement/{id}', 'update_announcement');
+        Route::delete('/announcement/{id}', 'delete_announcement');
     });
 });
