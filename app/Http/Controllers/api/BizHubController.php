@@ -11,7 +11,6 @@ use App\ApiHelper as API;
 
 class BizHubController extends Controller
 {
-    
 
     public function get_bizhub(Request $request)
     {

@@ -12,7 +12,6 @@ use App\ApiHelper as API;
 
 class AktivitiController extends Controller
 {
-    
 
     public function get_aktiviti(Request $request)
     {

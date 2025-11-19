@@ -12,8 +12,6 @@ use App\Models\Facility;
 
 class FasilityController extends Controller
 {
-    
-
     public function get_fasiliti(Request $request)
     {
         $data = Facility::all();
