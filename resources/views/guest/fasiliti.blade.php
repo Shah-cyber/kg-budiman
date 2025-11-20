@@ -62,9 +62,15 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach ($fasiliti as $item)
                     @php
-                        $mapUrl = $item->location
-                            ? 'https://www.google.com/maps/search/?api=1&query=' . urlencode($item->location)
-                            : null;
+                        $mapUrl = null;
+                        if (!empty($item->location)) {
+                            $location = trim($item->location);
+                            if (\Illuminate\Support\Str::startsWith($location, ['http://', 'https://'])) {
+                                $mapUrl = $location;
+                            } else {
+                                $mapUrl = 'https://www.google.com/maps/search/?api=1&query=' . urlencode($location);
+                            }
+                        }
                     @endphp
                     <!-- Facility Card -->
                     <div class="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-200 transform transition duration-500 ease-in-out hover:shadow-2xl hover:scale-[1.03]">
@@ -112,7 +118,7 @@
                 @endforeach
             </div>
 
-        </div>
+        </div> 
     </section>
 
 </x-app-layout>
