@@ -109,9 +109,9 @@
                     class="w-full h-full object-cover blur-2xl scale-110 brightness-[0.6] opacity-80" />
                   <div class="absolute inset-0 bg-linear-to-r from-white/60 via-white/40 to-transparent sm:from-white/50 sm:via-white/30 md:from-white/50 lg:from-black/40"></div>
                 </div>
-                <div class="relative h-full z-10 w-full mx-auto px-2 sm:px-3 md:px-2 lg:px-12 py-4 sm:py-6 md:py-8 flex flex-col md:flex-row items-center gap-4 sm:gap-5 md:gap-6 lg:gap-12">
-                  <div class="w-full md:w-1/2 flex justify-center md:justify-start order-2 md:order-1">
-                    <div class="bg-white/85 backdrop-blur-2xl border border-white/60 rounded-2xl sm:rounded-3xl md:rounded-4xl shadow-xl md:shadow-2xl p-4 sm:p-5 md:p-6 lg:p-8 w-full max-w-xl transition duration-500">
+                <div class="relative h-full z-10 w-full mx-auto px-2 sm:px-3 md:px-2 lg:px-12 py-4 sm:py-6 md:py-8 pb-12 sm:pb-14 md:pb-16 flex flex-col md:flex-row items-center gap-4 sm:gap-5 md:gap-6 lg:gap-12">
+                  <div class="w-full md:w-1/2 flex justify-center md:justify-start order-2 md:order-1 h-full">
+                    <div class="bg-white/85 backdrop-blur-2xl border border-white/60 rounded-2xl sm:rounded-3xl md:rounded-4xl shadow-xl md:shadow-2xl p-4 sm:p-5 md:p-6 lg:p-8 w-full max-w-xl transition duration-500 h-full flex flex-col overflow-hidden">
                       <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
                         <span class="px-2.5 sm:px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] sm:text-xs font-bold tracking-wider uppercase border border-primary/20">
                           Pengumuman
@@ -123,13 +123,13 @@
                           {{ $announcement['start_date'] ?? 'Tarikh TBA' }}
                         </span>
                       </div>
-                      <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight mb-3 sm:mb-4">
+                      <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight mb-3 sm:mb-4 shrink-0">
                         {{ $announcement['title'] }}
                       </h2>
-                      <p class="text-slate-600 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed mb-4 sm:mb-5 md:mb-6 whitespace-pre-line wrap-break-word overflow-visible">
+                      <p class="text-slate-600 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed mb-4 sm:mb-5 md:mb-6 whitespace-pre-line wrap-break-word overflow-y-auto flex-1 min-h-0">
                         {{ $announcement['summary'] }}
                       </p>
-                      <div class="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 sm:gap-4">
+                      <div class="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 shrink-0 mt-auto">
                         <a href="{{ route('aktiviti') }}"
                           class="group flex items-center justify-center gap-2 bg-slate-900 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl font-semibold text-xs sm:text-sm md:text-base shadow-lg shadow-primary/20 transition hover:bg-slate-800">
                           Lihat Aktiviti
@@ -162,11 +162,11 @@
           </div>
 
           <!-- Progress Dots -->
-          <div class="absolute bottom-3 sm:bottom-4 md:bottom-6 left-0 right-0 z-20 flex justify-center gap-2 sm:gap-3">
+          <div class="absolute bottom-3 sm:bottom-4 md:bottom-6 left-0 right-0 z-30 flex justify-center gap-2 sm:gap-3 pointer-events-none">
             @foreach($carouselAnnouncements as $index => $announcement)
               <button type="button"
                 @click="go({{ $index }})"
-                class="group relative h-1.5 sm:h-2 rounded-full transition-all duration-300 overflow-hidden bg-white/30 hover:bg-white/50 active:scale-110"
+                class="group relative h-1.5 sm:h-2 rounded-full transition-all duration-300 overflow-hidden bg-white/30 hover:bg-white/50 active:scale-110 pointer-events-auto"
                 :class="active === {{ $index }} ? 'w-10 sm:w-12' : 'w-2.5 sm:w-3'">
                 <span class="sr-only">Slide {{ $index + 1 }}</span>
                 <div x-show="active === {{ $index }}"
