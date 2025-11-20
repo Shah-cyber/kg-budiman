@@ -33,7 +33,7 @@
         <h3 class="font-semibold mb-3">Hubungi Kami</h3>
         <ul class="space-y-2 text-sm">
           <li>01234567892</li>
-          <li>kampungbudimanofficial@gmail.com.my</li>
+          <li>kampungbudimanofficial@gmail.com</li>
           <li>
             Lot 4470 /2, Jalan Haji Jalal,<br />
             Jalan Paip, Kampung Budiman,<br />
