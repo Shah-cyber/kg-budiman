@@ -89,14 +89,22 @@ class AktivitiController extends Controller
 
     /**
      * Retrieve announcements for guest Aktiviti page with pagination.
+     * Shows announcements that:
+     * - Start within 3 days (start_date >= today - 3 days)
+     * - Have not ended 5+ days ago (end_date >= today - 5 days)
      */
     public function guestAnnouncements(int $perPage = 4): LengthAwarePaginator
     {
         $now = now();
+        
+        // Show announcements that started within the last 3 days or in the future
+        $startDateThreshold = $now->copy()->subDays(3);
+        
+        // Don't show announcements that ended 5+ days ago
+        $endDateThreshold = $now->copy()->subDays(5);
 
-        $windowStart = $now->copy()->subDays(3);
-
-        return Announcement::whereDate('start_date', '>=', $windowStart)
+        return Announcement::whereDate('start_date', '>=', $startDateThreshold)
+            ->whereDate('end_date', '>=', $endDateThreshold)
             ->orderBy('start_date', 'desc')
             ->paginate($perPage);
     }
