@@ -91,22 +91,26 @@ class AktivitiController extends Controller
      * Retrieve announcements for guest Aktiviti page with pagination.
      *
      * Logic:
-     * - Display upcoming announcements only (start_date >= today)
-     * - Hide announcements that have already ended (end_date < today)
-     * - Include announcements with NULL end_date (ongoing)
+     * - Display upcoming announcements (start_date >= today)
+     * - Also display ongoing announcements where start_date has passed but end_date is null or still in future
+     * - Hide announcements whose end_date has already been reached
      */
     public function guestAnnouncements(int $perPage = 4): LengthAwarePaginator
     {
         $today = now()->startOfDay();
-        
-        return Announcement::whereDate('start_date', '>=', $today)
-            ->where(function ($query) use ($today) {
-                // Only show announcements that haven't ended yet
-                // Include announcements with no end_date (NULL) OR end_date >= today
-                $query->whereNull('end_date')
-                      ->orWhereDate('end_date', '>=', $today);
+
+        return Announcement::where(function ($query) use ($today) {
+                $query->whereDate('start_date', '>=', $today) // upcoming
+                      ->orWhere(function ($ongoing) use ($today) {
+                          $ongoing->whereDate('start_date', '<', $today) // already started
+                                  ->where(function ($endDateScope) use ($today) {
+                                      // still active (no end date or end date not reached)
+                                      $endDateScope->whereNull('end_date')
+                                                   ->orWhereDate('end_date', '>=', $today);
+                                  });
+                      });
             })
-            ->orderBy('start_date', 'desc')
+            ->orderBy('start_date', 'asc')
             ->paginate($perPage);
     }
 }
