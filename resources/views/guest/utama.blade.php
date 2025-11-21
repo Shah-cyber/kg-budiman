@@ -89,7 +89,7 @@
           x-init="start()"
           @mouseenter="stop()"
           @mouseleave="start()">
-          <div class="relative h-auto min-h-[500px] sm:min-h-[550px] md:h-[560px] rounded-2xl sm:rounded-3xl md:rounded-[32px] overflow-hidden shadow-xl md:shadow-2xl ring-1 ring-black/10 bg-slate-900">
+          <div class="relative w-full min-h-[680px] sm:min-h-[720px] md:min-h-[520px] md:h-[560px] lg:h-[580px] rounded-2xl sm:rounded-3xl md:rounded-[32px] overflow-hidden shadow-xl md:shadow-2xl ring-1 ring-black/10 bg-slate-900">
             @foreach($carouselAnnouncements as $announcement)
               <article class="absolute inset-0 w-full h-full"
                 x-show="active === {{ $loop->index }}"
@@ -151,7 +151,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="w-full md:w-1/2 h-[200px] sm:h-[240px] md:h-full flex items-center justify-center order-1 md:order-2 relative px-2 sm:px-4">
+                  <div class="w-full md:w-1/2 h-[240px] sm:h-[260px] md:h-full flex items-center justify-center order-1 md:order-2 relative px-2 sm:px-4">
                     <img src="{{ $announcement['image_url'] }}"
                       alt="{{ $announcement['title'] }}"
                       class="max-h-full max-w-full object-contain rounded-xl sm:rounded-2xl md:rounded-3xl shadow-xl md:shadow-2xl ring-1 ring-white/30 bg-white/10" />
