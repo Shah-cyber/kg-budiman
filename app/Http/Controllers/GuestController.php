@@ -15,8 +15,20 @@ class GuestController extends Controller
 {
     public function utama()
     {
-        $carouselAnnouncements = Announcement::whereDate('start_date', '<=', now()->startOfDay())
-            ->orderBy('start_date')
+        $today = now()->startOfDay();
+        
+        // Show announcements that started 3 days before today or later
+        // Example: If today is 23/11/25, show from 21/11/25 onwards
+        $startDateThreshold = $today->copy()->subDays(3);
+        
+        $carouselAnnouncements = Announcement::whereDate('start_date', '>=', $startDateThreshold)
+            ->where(function ($query) use ($today) {
+                // Only show announcements that haven't ended yet
+                // Include announcements with no end_date (NULL) OR end_date >= today
+                $query->whereNull('end_date')
+                      ->orWhereDate('end_date', '>=', $today);
+            })
+            ->orderBy('start_date', 'desc')
             ->get()
             ->map(function (Announcement $announcement, int $index) {
                 $imageUrl = $announcement->image_path
