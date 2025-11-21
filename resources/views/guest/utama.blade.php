@@ -62,6 +62,10 @@
             total: {{ $slideCount }},
             timer: null,
             progress: 0,
+            touchStartX: null,
+            touchEndX: null,
+            touchThreshold: 70,
+            isTouchMode: window.matchMedia('(max-width: 767px)').matches,
             start() {
               if (this.total <= 1) return;
               this.stop();
@@ -84,12 +88,47 @@
               this.active = index;
               this.progress = 0;
               this.start();
+            },
+            updateTouchMode() {
+              this.isTouchMode = window.matchMedia('(max-width: 767px)').matches;
+            },
+            handleTouchStart(event) {
+              if (!this.isTouchMode) return;
+              this.stop();
+              this.touchStartX = event.touches[0].clientX;
+              this.touchEndX = this.touchStartX;
+            },
+            handleTouchMove(event) {
+              if (!this.isTouchMode || this.touchStartX === null) return;
+              this.touchEndX = event.touches[0].clientX;
+            },
+            handleTouchEnd() {
+              if (!this.isTouchMode || this.touchStartX === null || this.touchEndX === null) {
+                this.touchStartX = this.touchEndX = null;
+                this.start();
+                return;
+              }
+              const delta = this.touchEndX - this.touchStartX;
+              if (Math.abs(delta) > this.touchThreshold) {
+                if (delta < 0) {
+                  this.active = (this.active + 1) % this.total;
+                } else {
+                  this.active = (this.active === 0) ? this.total - 1 : this.active - 1;
+                }
+                this.progress = 0;
+              }
+              this.touchStartX = this.touchEndX = null;
+              this.start();
             }
           }"
-          x-init="start()"
+          x-init="start(); updateTouchMode(); window.addEventListener('resize', () => updateTouchMode())"
           @mouseenter="stop()"
           @mouseleave="start()">
-          <div class="relative w-full min-h-[680px] sm:min-h-[720px] md:min-h-[520px] md:h-[560px] lg:h-[580px] rounded-2xl sm:rounded-3xl md:rounded-[32px] overflow-hidden shadow-xl md:shadow-2xl ring-1 ring-black/10 bg-slate-900">
+          <div class="relative w-full min-h-[680px] sm:min-h-[720px] md:min-h-[520px] md:h-[560px] lg:h-[580px] rounded-2xl sm:rounded-3xl md:rounded-[32px] overflow-hidden shadow-xl md:shadow-2xl ring-1 ring-black/10 bg-slate-900"
+            @touchstart.passive="handleTouchStart($event)"
+            @touchmove.passive="handleTouchMove($event)"
+            @touchend="handleTouchEnd()"
+            @touchcancel="handleTouchEnd()">
             @foreach($carouselAnnouncements as $announcement)
               <article class="absolute inset-0 w-full h-full"
                 x-show="active === {{ $loop->index }}"
